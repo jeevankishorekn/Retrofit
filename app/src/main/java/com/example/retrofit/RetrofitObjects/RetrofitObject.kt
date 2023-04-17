@@ -1,5 +1,8 @@
-package com.example.retrofit
+package com.example.retrofit.RetrofitObjects
 
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -8,8 +11,8 @@ object RetrofitObject{
         Retrofit.Builder()
             .baseUrl("https://jsonplaceholder.typicode.com")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build())
             .build()
-            .create(RetrofitService::class.java)
     }
 
 
